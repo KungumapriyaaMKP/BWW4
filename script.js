@@ -103,7 +103,7 @@
       rsvpNote: 'This opens WhatsApp with your reply written out. Nothing is sent until you press send.',
       familySignoff: 'With love, the families',
       coupleSignoff: 'Shreya &amp; Yuvan',
-      inviteMadeWith: 'Invite made with'
+      inviteMadeWith: 'Invite made by Sumya Web Studio'
     },
     ta: {
       langToggleLabel: 'EN',
@@ -188,7 +188,7 @@
       rsvpNote: 'இது வாட்ஸ்அப்பில் உங்கள் பதிலுடன் திறக்கும். நீங்கள் அனுப்பும் வரை எதுவும் செல்லாது.',
       familySignoff: 'அன்புடன், குடும்பத்தினர்',
       coupleSignoff: 'ஸ்ரேயா &amp; யுவன்',
-      inviteMadeWith: 'அழைப்பிதழ் தயாரிப்பு'
+      inviteMadeWith: 'Invite made by Sumya Web Studio'
     }
   };
 

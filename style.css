@@ -27,7 +27,6 @@
   --font-serif: 'Cormorant Garamond', Georgia, serif;
   --font-display: 'Cinzel', serif;
   --font-tamil: 'Noto Serif Tamil', serif;
-  --font-deva: 'Tiro Devanagari Hindi', serif;
 
   /* Layout dimensions */
   --max-width: 520px;
@@ -124,8 +123,8 @@ body {
 }
 
 .lang-btn {
-  font-family: var(--font-deva), var(--font-serif);
-  font-size: 1.05rem;
+  font-family: var(--font-tamil), var(--font-serif);
+  font-size: 0.98rem;
   font-weight: 600;
   letter-spacing: 0.5px;
 }
@@ -1125,11 +1124,11 @@ body {
   margin-bottom: 4px;
 }
 
-.tl-deva {
-  font-family: var(--font-deva);
-  font-size: 1.15rem;
+.tl-tamil {
+  font-family: var(--font-tamil);
+  font-size: 1.05rem;
   font-weight: 500;
-  margin-left: 4px;
+  margin-left: 6px;
   color: #665544;
 }
 

@@ -8,7 +8,7 @@
 
   // --- APPLICATION STATE ---
   const state = {
-    currentLang: 'en', // 'en' | 'hi'
+    currentLang: 'en', // 'en' | 'ta'
     audioPlaying: false,
     gateOpened: false,
     cardsRevealed: {
@@ -22,13 +22,13 @@
   // --- BILINGUAL TRANSLATION DICTIONARY ---
   const I18N = {
     en: {
-      langToggleLabel: 'हिं',
+      langToggleLabel: 'தமி',
       gateInvited: "You're invited",
       gateSub: 'TO A WEDDING IN MADURAI',
       gatePrompt: '✦ Tap the lamp to light it ✦',
       heroPre: 'Welcome to the wedding of',
-      heroBride: 'Tanya',
-      heroGroom: 'Vikram',
+      heroBride: 'Shreya',
+      heroGroom: 'Yuvan',
       heroCity: 'MADURAI',
       scrollDown: 'Scroll down',
       dateTitle: 'The Date',
@@ -40,18 +40,17 @@
       whenDetail: 'Sunday, at 7:30 am · The mandapam, at sunrise',
       addCal: 'Add to calendar',
       invBlessing: 'With the blessings of our elders,<br>you are invited to the wedding of',
-      invBride: 'Tanya Raghavan',
+      invBride: 'Shreya',
       invDaughterOf: 'DAUGHTER OF',
       invBrideParents: 'SMT. LAKSHMI & SHRI RAGHAVAN',
       invWith: 'with',
-      invGroom: 'Vikram Subramanian',
+      invGroom: 'Yuvan',
       invSonOf: 'SON OF',
       invGroomParents: 'SMT. MEENAKSHI & SHRI SUBRAMANIAN',
       invDate: 'Sunday, 14 February 2027',
       invVenue: 'The Kalyana Mandapam, Madurai',
       storyTitle: 'Our story',
-      storyLead: 'We met at a college fest in Chennai, both volunteering at the music stage. Five years, one long year apart and many filter coffees later, we are getting married.',
-      storyTag1: 'Fest 2021',
+      storyLead: 'We met at a college fest in Chennai, both volunteering at the music stage. Five years, one long year apart and many filter coffees later, we are getting married.',      storyTag1: 'Fest 2021',
       storyDesc1: 'Two volunteers, one music stage',
       storyTag2: '2023',
       storyDesc2: 'Chennai and Bengaluru, one long call a night',
@@ -68,15 +67,15 @@
       eventsTitle: 'The celebrations',
       mehendiMeta: 'Sat, 13 Feb · 10:30 am',
       mehendiTitleEn: 'Mehendi',
-      mehendiTitleHi: 'मेहंदी',
+      mehendiTitleTa: 'மெஹந்தி',
       mehendiPlace: 'The garden courtyard',
       receptionMeta: 'Sat, 13 Feb · 7:00 pm',
       receptionTitleEn: 'Reception',
-      receptionTitleHi: 'रिसेप्शन',
+      receptionTitleTa: 'வரவேற்பு',
       receptionPlace: 'The mandapam hall, with dinner on banana leaves',
       muhurthamMeta: 'Sun, 14 Feb · 7:30 am',
       muhurthamTitleEn: 'Muhurtham',
-      muhurthamTitleHi: 'मुहूर्तम',
+      muhurthamTitleTa: 'முகூர்த்தம்',
       muhurthamPlace: 'The mandapam, at sunrise',
       countTitle: 'The celebration begins',
       lblDays: 'Days',
@@ -102,94 +101,94 @@
       rsvpDate2: 'Sun, 14 Feb',
       btnSendWhatsapp: 'Send on WhatsApp',
       rsvpNote: 'This opens WhatsApp with your reply written out. Nothing is sent until you press send.',
-      familySignoff: 'With love, the Raghavan and Subramanian families',
-      coupleSignoff: 'Tanya &amp; Vikram',
+      familySignoff: 'With love, the families',
+      coupleSignoff: 'Shreya &amp; Yuvan',
       inviteMadeWith: 'Invite made with'
     },
-    hi: {
+    ta: {
       langToggleLabel: 'EN',
-      gateInvited: 'सादर निमंत्रण',
-      gateSub: 'मदुरै में एक शुभ विवाह',
-      gatePrompt: '✦ दीपक प्रज्वलित करने के लिए स्पर्श करें ✦',
-      heroPre: 'विवाह में आपका हार्दिक स्वागत है',
-      heroBride: 'तान्या',
-      heroGroom: 'विक्रम',
-      heroCity: 'मदुरै',
-      scrollDown: 'नीचे देखें',
-      dateTitle: 'शुभ तिथि',
-      scratchPrompt: 'तिथि जानने के लिए स्क्रैच करें',
-      lblDay: 'दिन',
-      lblMonth: 'माह',
-      lblYear: 'वर्ष',
-      valMonth: 'फ़रवरी',
-      whenDetail: 'रविवार, प्रातः 7:30 बजे · मंडपम में, सूर्योदय के समय',
-      addCal: 'कैलेंडर में जोड़ें',
-      invBlessing: 'हमारे पूज्य बड़ों के आशीर्वाद से,<br>आप सादर आमंत्रित हैं हमारे विवाह में',
-      invBride: 'तान्या राघवन',
-      invDaughterOf: 'सुपुत्री',
-      invBrideParents: 'श्रीमती लक्ष्मी एवं श्री राघवन',
-      invWith: 'संग',
-      invGroom: 'विक्रम सुब्रमण्यम',
-      invSonOf: 'सुपुत्र',
-      invGroomParents: 'श्रीमती मीनाक्षी एवं श्री सुब्रमण्यम',
-      invDate: 'रविवार, 14 फ़रवरी 2027',
-      invVenue: 'द कल्याणा मंडपम, मदुरै',
-      storyTitle: 'हमारी कहानी',
-      storyLead: 'हम चेन्नई में एक कॉलेज फेस्ट में मिले थे, दोनों संगीत मंच पर स्वयंसेवा कर रहे थे। पाँच साल, एक लंबा साल दूर और कई फ़िल्टर कॉफ़ी के बाद, हम परिणय सूत्र में बंध रहे हैं।',
-      storyTag1: 'फेस्ट 2021',
-      storyDesc1: 'दो स्वयंसेवक, एक संगीत मंच',
+      gateInvited: 'அன்புடன் அழைக்கிறோம்',
+      gateSub: 'மதுரையில் ஒரு மங்கலத் திருமணம்',
+      gatePrompt: '✦ தீபம் ஏற்ற இங்கு தொடவும் ✦',
+      heroPre: 'திருமணத்திற்கு அன்புடன் வரவேற்கிறோம்',
+      heroBride: 'ஸ்ரேயா',
+      heroGroom: 'யுவன்',
+      heroCity: 'மதுரை',
+      scrollDown: 'கீழே பார்க்க',
+      dateTitle: 'மங்கலத் தேதி',
+      scratchPrompt: 'தேதியை அறிய சுரண்டவும்',
+      lblDay: 'நாள்',
+      lblMonth: 'மாதம்',
+      lblYear: 'ஆண்டு',
+      valMonth: 'பிப்ரவரி',
+      whenDetail: 'ஞாயிறு, காலை 7:30 மணி · மண்டபத்தில், சூரிய உதய வேளையில்',
+      addCal: 'நாள்காட்டியில் சேர்க்க',
+      invBlessing: 'பெரியோர்களின் ஆசியுடன்,<br>எங்கள் திருமணத்திற்கு அன்புடன் அழைக்கின்றோம்',
+      invBride: 'ஸ்ரேயா',
+      invDaughterOf: 'இவர்களின் மகள்',
+      invBrideParents: 'திருமதி. லக்ஷ்மி & திரு. ராகவன்',
+      invWith: 'மற்றும்',
+      invGroom: 'யுவன்',
+      invSonOf: 'இவர்களின் மகன்',
+      invGroomParents: 'திருமதி. மீனாட்சி & திரு. சுப்ரமணியன்',
+      invDate: 'ஞாயிற்றுக்கிழமை, 14 பிப்ரவரி 2027',
+      invVenue: 'கல்யாண மண்டபம், மதுரை',
+      storyTitle: 'எங்கள் பயணம்',
+      storyLead: 'சென்னையில் ஒரு கல்லூரி விழாவில், இசை மேடையில் இருவரும் தன்னார்வலர்களாக சந்தித்தோம். ஐந்து ஆண்டுகள், ஒரு நீண்ட ஆண்டு பிரிவும் பல ஃபில்டர் காபிகளுக்குப் பிறகு, நாங்கள் இணைகிறோம்.',
+      storyTag1: 'ஃபெஸ்ட் 2021',
+      storyDesc1: 'இரு தன்னார்வலர்கள், ஓர் இசை மேடை',
       storyTag2: '2023',
-      storyDesc2: 'चेन्नई और बेंगलुरु, हर रात एक लंबी बात',
-      storyTag3: 'पोंगल 2026',
-      storyDesc3: 'सक्कराई पोंगल के साथ दोनों परिवारों ने हामी भरी',
-      photosTitle: 'हमारा अब तक का सफ़र',
-      cap1: 'हमारा पहला पोट्रेट',
-      cap2: 'घर के बगीचे में',
-      cap3: 'वो ख़ास नज़र',
-      cap4: 'बोगनवेलिया के साये में',
-      cap5: 'पाटी के एल्बम के लिए',
-      cap6: 'फ़व्वारे के किनारे',
-      swipeHint: 'और देखने के लिए स्वाइप करें',
-      eventsTitle: 'विवाह उत्सव',
-      mehendiMeta: 'शनिवार, 13 फ़रवरी · प्रातः 10:30 बजे',
-      mehendiTitleEn: 'मेहंदी',
-      mehendiTitleHi: '',
-      mehendiPlace: 'बगीचे का आँगन',
-      receptionMeta: 'शनिवार, 13 फ़रवरी · सायं 7:00 बजे',
-      receptionTitleEn: 'रिसेप्शन',
-      receptionTitleHi: '',
-      receptionPlace: 'मंडपम हॉल, केले के पत्तों पर पारंपरिक प्रीतिभोज',
-      muhurthamMeta: 'रविवार, 14 फ़रवरी · प्रातः 7:30 बजे',
-      muhurthamTitleEn: 'मुहूर्तम',
-      muhurthamTitleHi: '',
-      muhurthamPlace: 'मंडपम, सूर्योदय के समय',
-      countTitle: 'उत्सव का शुभारंभ',
-      lblDays: 'दिन',
-      lblHours: 'घंटे',
-      lblMinutes: 'मिनट',
-      lblSeconds: 'सेकंड',
-      countTarget: 'मेहंदी उत्सव तक, शनिवार, 13 फ़रवरी',
-      venueTitle: 'स्थान',
-      venueCity: 'मदुरै',
-      venueHall: 'द कल्याणा मंडपम',
-      venueAddress: 'तेप्पाकुलम के समीप, मदुरै, तमिलनाडु',
-      btnShowMap: 'मानचित्र देखें',
-      btnOpenMaps: 'गूगल मैप्स में खोलें',
-      spotifyBadge: 'स्पॉटिफ़ाई पर सुनें',
-      rsvpTitle: 'क्या आप सम्मिलित होंगे?',
-      rsvpSub: 'कृपया 20 जनवरी तक प्रत्येक कार्यक्रम के लिए अपने आगमन की सूचना दें।',
-      lblYourName: 'आपका नाम',
-      rsvpRow0: 'मेहंदी',
-      rsvpDate0: 'शनि, 13 फ़रवरी',
-      rsvpRow1: 'रिसेप्शन',
-      rsvpDate1: 'शनि, 13 फ़रवरी',
-      rsvpRow2: 'मुहूर्तम',
-      rsvpDate2: 'रवि, 14 फ़रवरी',
-      btnSendWhatsapp: 'व्हाट्सएप पर भेजें',
-      rsvpNote: 'यह आपके संदेश के साथ व्हाट्सएप खोलेगा। आपके \'सेंड\' दबाने तक कुछ भी नहीं भेजा जाएगा।',
-      familySignoff: 'सप्रेम, राघवन एवं सुब्रमण्यम परिवार',
-      coupleSignoff: 'तान्या एवं विक्रम',
-      inviteMadeWith: 'आमंत्रण पत्र द्वारा'
+      storyDesc2: 'சென்னை மற்றும் பெங்களூரு, இரவில் ஒரு நீண்ட உரையாடல்',
+      storyTag3: 'பொங்கல் 2026',
+      storyDesc3: 'சர்க்கரைப் பொங்கலுடன் இரு குடும்பத்தினரும் சம்மதித்தனர்',
+      photosTitle: 'இதுவரை நாங்கள்',
+      cap1: 'எங்களின் முதல் புகைப்படம்',
+      cap2: 'வீட்டுத் தோட்டத்தில்',
+      cap3: 'அவளைப் பார்க்கும் பார்வை',
+      cap4: 'பூங்கொடியின் நிழலில்',
+      cap5: "பாட்டியின் ஆல்பத்திற்காக",
+      cap6: 'நீரூற்றின் அருகே',
+      swipeHint: 'மேலும் பார்க்க நகர்த்தவும்',
+      eventsTitle: 'திருமண வைபவங்கள்',
+      mehendiMeta: 'சனி, 13 பிப் · காலை 10:30 மணி',
+      mehendiTitleEn: 'மெஹந்தி',
+      mehendiTitleTa: '',
+      mehendiPlace: 'தோட்ட முற்றத்தில்',
+      receptionMeta: 'சனி, 13 பிப் · மாலை 7:00 மணி',
+      receptionTitleEn: 'வரவேற்பு',
+      receptionTitleTa: '',
+      receptionPlace: 'மண்டபத்தில், வாழை இலை பாரம்பரிய விருந்துடன்',
+      muhurthamMeta: 'ஞாயிறு, 14 பிப் · காலை 7:30 மணி',
+      muhurthamTitleEn: 'முகூர்த்தம்',
+      muhurthamTitleTa: '',
+      muhurthamPlace: 'மண்டபத்தில், சூரிய உதய வேளையில்',
+      countTitle: 'வைபவம் தொடங்க இன்னும்',
+      lblDays: 'நாட்கள்',
+      lblHours: 'மணி',
+      lblMinutes: 'நிமிடம்',
+      lblSeconds: 'விநாடி',
+      countTarget: 'மெஹந்தி வரை, சனிக்கிழமை, 13 பிப்ரவரி',
+      venueTitle: 'திருமண இடம்',
+      venueCity: 'மதுரை',
+      venueHall: 'கல்யாண மண்டபம்',
+      venueAddress: 'தெப்பக்குளம் அருகில், மதுரை, தமிழ்நாடு',
+      btnShowMap: 'வரைபடம் பார்க்க',
+      btnOpenMaps: 'கூகுள் மேப்ஸில் திறக்க',
+      spotifyBadge: 'ஸ்பாட்டிஃபையில் கேட்கவும்',
+      rsvpTitle: 'எங்களுடன் இணைவீர்களா?',
+      rsvpSub: 'ஜனவரி 20-க்குள் தாங்கள் கலந்துகொள்ளும் நபர்களின் எண்ணிக்கையைத் தெரிவிக்க வேண்டுகிறோம்.',
+      lblYourName: 'உங்கள் பெயர்',
+      rsvpRow0: 'மெஹந்தி',
+      rsvpDate0: 'சனி, 13 பிப்',
+      rsvpRow1: 'வரவேற்பு',
+      rsvpDate1: 'சனி, 13 பிப்',
+      rsvpRow2: 'முகூர்த்தம்',
+      rsvpDate2: 'ஞாயிறு, 14 பிப்',
+      btnSendWhatsapp: 'வாட்ஸ்அப்பில் அனுப்ப',
+      rsvpNote: 'இது வாட்ஸ்அப்பில் உங்கள் பதிலுடன் திறக்கும். நீங்கள் அனுப்பும் வரை எதுவும் செல்லாது.',
+      familySignoff: 'அன்புடன், குடும்பத்தினர்',
+      coupleSignoff: 'ஸ்ரேயா &amp; யுவன்',
+      inviteMadeWith: 'அழைப்பிதழ் தயாரிப்பு'
     }
   };
 
@@ -734,7 +733,7 @@
     if (state.currentLang === 'hi') {
       message = `नमस्ते तान्या और विक्रम! मैं ${guestName}।\n\nहमारे आगमन की पुष्टि:\n- मेहंदी: ${mehendiCount} व्यक्ति\n- रिसेप्शन: ${receptionCount} व्यक्ति\n- मुहूर्तम: ${muhurthamCount} व्यक्ति\n\nविवाह उत्सव में सम्मिलित होने के लिए हम उत्सुक हैं!`;
     } else {
-      message = `Hi Tanya & Vikram! ${guestName} here.\n\nRSVP Details:\n- Mehendi: ${mehendiCount} guest(s)\n- Reception: ${receptionCount} guest(s)\n- Muhurtham: ${muhurthamCount} guest(s)\n\nLooking forward to celebrating with you!`;
+      message = `Hi Shreya & Yuvan! ${guestName} here.\n\nRSVP Details:\n- Mehendi: ${mehendiCount} guest(s)\n- Reception: ${receptionCount} guest(s)\n- Muhurtham: ${muhurthamCount} guest(s)\n\nLooking forward to celebrating with you!`;
     }
 
     const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
@@ -750,18 +749,18 @@
     let dtEnd = '';
 
     if (eventType === 'mehendi') {
-      title = 'Tanya & Vikram Wedding: Mehendi';
+      title = 'Shreya & Yuvan Wedding: Mehendi';
       description = 'Mehendi celebration at the garden courtyard';
       dtStart = '20270213T050000Z'; // 10:30 AM IST = 05:00 UTC
       dtEnd = '20270213T093000Z';   // 3:00 PM IST
     } else if (eventType === 'reception') {
-      title = 'Tanya & Vikram Wedding: Reception';
+      title = 'Shreya & Yuvan Wedding: Reception';
       description = 'Wedding Reception with dinner served on traditional banana leaves';
       dtStart = '20270213T133000Z'; // 7:00 PM IST = 13:30 UTC
       dtEnd = '20270213T173000Z';
     } else {
       // muhurtham / main wedding
-      title = 'Tanya & Vikram Wedding: Muhurtham';
+      title = 'Shreya & Yuvan Wedding: Muhurtham';
       description = 'Sacred wedding ceremony at sunrise';
       dtStart = '20270214T020000Z'; // 7:30 AM IST = 02:00 UTC
       dtEnd = '20270214T063000Z';
@@ -788,7 +787,7 @@
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `tanya-vikram-${eventType || 'wedding'}.ics`;
+    a.download = `shreya-yuvan-${eventType || 'wedding'}.ics`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);

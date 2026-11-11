@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Tanya &amp; Vikram, 14 February 2027 | Temple Wedding Invitation</title>
+  
+  <meta name="description" content="A temple gateway at dusk, and a brass lamp your guests light themselves. Traditional South Indian wedding invitation in Madurai.">
+  <meta name="theme-color" content="#1C2340">
+
+  <!-- Google Fonts Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Noto+Serif+Tamil:wght@400;500;600&family=Pinyon+Script&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Critical Asset Preloading for Zero-Latency First Interaction -->
+  <link rel="preload" as="image" href="assets/closed.webp" type="image/webp">
+  <link rel="preload" as="image" href="assets/open.webp" type="image/webp">
+  <link rel="preload" as="image" href="assets/hero.webp" type="image/webp">
+  <link rel="preload" as="image" href="assets/paper.webp" type="image/webp">
+  <link rel="preload" as="audio" href="assets/theme.mp3">
+
+  <!-- Open Graph & Deployment Metadata -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Tanya &amp; Vikram Wedding | 14 February 2027">
+  <meta property="og:description" content="Traditional South Indian temple wedding invitation in Madurai.">
+  <meta property="og:image" content="assets/hero.webp">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+<body class="stage-dark">
+
+  <!-- Audio Element -->
+  <audio id="bgAudio" preload="auto" loop src="assets/theme.mp3"></audio>
+
+  <!-- Mobile Viewport Frame / App Container -->
+  <div id="app" class="invite-container">
+
+    <!-- FLOATING HUD CONTROLS (Top/Bottom fixed) -->
+    <div class="hud-controls" id="hudControls">
+      <!-- Language Switch Button -->
+      <button class="hud-btn lang-btn" id="langBtn" aria-label="Switch language" title="Switch language">
+        <span class="lang-text" id="langBtnLabel">हिं</span>
+      </button>
+
+      <!-- Audio Music Toggle Button -->
+      <button class="hud-btn audio-btn" id="audioBtn" aria-label="Toggle music" title="Toggle music">
+        <svg class="icon-sound-on" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+        </svg>
+        <svg class="icon-sound-off hide" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <line x1="23" y1="9" x2="17" y2="15"></line>
+          <line x1="17" y1="9" x2="23" y2="15"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- 1. UNLIT GATE / OPENING VIEW -->
+    <section id="gate" class="gate-section">
+      <!-- Lit Background Artwork (Underneath, revealed as unlit layer is masked away) -->
+      <img class="gate-art gate-lit" id="gateLit" src="assets/open.webp" alt="Lit Temple with lamps" decoding="async">
+
+      <!-- Unlit Background Artwork (On top, displays dusk temple and brass lamp initially) -->
+      <img class="gate-art gate-unlit" id="gateUnlit" src="assets/closed.webp" alt="Madurai Temple at dusk with brass Kuthuvilakku lamp" decoding="async">
+
+      <!-- Canvas for Lamp Sparks Physics -->
+      <canvas id="sparksCanvas" class="sparks-canvas"></canvas>
+
+      <!-- Atmospheric Opening Header -->
+      <header class="gate-header">
+        <p class="gate-invited-script" id="txtGateInvited">You're invited</p>
+        <h1 class="gate-title-cinzel" id="txtGateSub">TO A WEDDING IN MADURAI</h1>
+      </header>
+
+      <!-- Interactive Lamp Hitbox Area (Wick Center: 49.9% X, 42.1% Y) -->
+      <div class="lamp-interactive-area" id="lampTapArea" role="button" tabindex="0" aria-label="Open the invitation by lighting the lamp">
+        <!-- 5 Wick Flame Elements -->
+        <div class="wick-flames-container" id="wickFlames">
+          <span class="flame flame-1"></span>
+          <span class="flame flame-2"></span>
+          <span class="flame flame-3"></span>
+          <span class="flame flame-4"></span>
+          <span class="flame flame-5"></span>
+        </div>
+        <!-- Lamp Halo Glow -->
+        <div class="lamp-glow-halo" id="lampGlowHalo"></div>
+      </div>
+
+      <!-- Bottom Tap Prompt -->
+      <footer class="gate-footer">
+        <p class="gate-prompt" id="txtGatePrompt">
+          <span class="sparkle-sym">✦</span> Tap the lamp to light it <span class="sparkle-sym">✦</span>
+        </p>
+      </footer>
+    </section>
+
+    <!-- 2. MAIN INVITATION VIEW (HERO & PAPER SCROLL) -->
+    <main id="mainContent" class="main-content hide">
+      
+      <!-- HERO VIEW (Couple at Vandiyur Teppakulam lake mandapam) -->
+      <section id="hero" class="hero-section">
+        <div class="hero-art-wrapper">
+          <img class="hero-art" id="heroArt" src="assets/hero.webp" alt="Tanya &amp; Vikram at Madurai Temple Pond" decoding="async">
+          <div class="hero-overlay-gradient"></div>
+        </div>
+
+        <div class="hero-words" id="heroWords">
+          <p class="hw-pre" id="txtHeroPre">Welcome to the wedding of</p>
+          <div class="hw-names">
+            <span class="hw-name" id="txtHeroBride">Tanya</span>
+            <span class="hw-amp">&amp;</span>
+            <span class="hw-name" id="txtHeroGroom">Vikram</span>
+          </div>
+          <div class="hw-rule">
+            <img class="divider-art" src="assets/divider.webp" alt="" aria-hidden="true">
+          </div>
+          <p class="hw-date" id="txtHeroCity">MADURAI</p>
+        </div>
+
+        <!-- Scroll Down Indicator -->
+        <a href="#paper" class="scroll-down-btn" id="scrollDownBtn" aria-label="Scroll down to invitation">
+          <span id="txtScrollDown">Scroll down</span>
+          <svg class="chevron-down" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </a>
+      </section>
+
+      <!-- 3. PARCHMENT PAPER SCROLL -->
+      <div id="paper" class="paper-container">
+
+        <!-- SECTION: THE DATE & SCRATCH CARDS -->
+        <section id="date" class="sec sec-date reveal">
+          <h2 class="sec-title" id="txtDateTitle">The Date</h2>
+          <div class="sec-orn">
+            <img class="divider-art" src="assets/divider.webp" alt="" aria-hidden="true">
+          </div>
+          <p class="sparkle-line" id="txtDateInstruction">
+            <span aria-hidden="true">✦</span> <span id="txtScratchPrompt">Scratch to reveal the date</span> <span aria-hidden="true">✦</span>
+          </p>
+
+          <!-- 3 Scratch Cards: Day, Month, Year -->
+          <div class="cards" id="dateCardsContainer">
+            <!-- Day Card -->
+            <div class="card">
+              <div class="foil-wrapper" id="cardDayWrap">
+                <span class="val" id="valDay">14</span>
+                <canvas class="foil-canvas" id="canvasDay" width="140" height="168" aria-label="Scratch to reveal day"></canvas>
+              </div>
+              <span class="caps" id="lblDay">Day</span>
+            </div>
+
+            <!-- Month Card -->
+            <div class="card">
+              <div class="foil-wrapper" id="cardMonthWrap">
+                <span class="val word" id="valMonth">February</span>
+                <canvas class="foil-canvas" id="canvasMonth" width="140" height="168" aria-label="Scratch to reveal month"></canvas>
+              </div>
+              <span class="caps" id="lblMonth">Month</span>
+            </div>
+
+            <!-- Year Card -->
+            <div class="card">
+              <div class="foil-wrapper" id="cardYearWrap">
+                <span class="val" id="valYear">2027</span>
+                <canvas class="foil-canvas" id="canvasYear" width="140" height="168" aria-label="Scratch to reveal year"></canvas>
+              </div>
+              <span class="caps" id="lblYear">Year</span>
+            </div>
+          </div>
+
+          <!-- Date Subtext & Add to Calendar Button (Revealed on scratch) -->
+          <div class="when-wrap" id="whenLine">
+            <p class="when-details" id="txtWhenDetail">Sunday, at 7:30 am · The mandapam, at sunrise</p>
+            <button class="textbtn add-cal-btn" id="btnAddToCalMain" type="button">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+              <span id="txtAddCalMain">Add to calendar</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- SECTION: FORMAL WEDDING INVITATION CARD (Jharokha Arch) -->
+        <section id="invitation" class="sec sec-invitation reveal">
+          <div class="jharokha-frame">
+            <div class="jharokha-inner">
+              <!-- Sacred Tamil Invocation -->
+              <div class="sacred-tamil-symbol">உ</div>
+
+              <!-- Monogram Seal Stamp -->
+              <div class="seal-container">
+                <div class="monogram-badge">
+                  <span class="monogram-text">TV</span>
+                </div>
+              </div>
+
+              <p class="inv-blessing" id="txtInvBlessing">
+                With the blessings of our elders,<br>you are invited to the wedding of
+              </p>
+
+              <!-- Bride Details -->
+              <div class="inv-person">
+                <h3 class="inv-name" id="txtInvBride">Tanya Raghavan</h3>
+                <p class="inv-parent-label" id="txtInvDaughterOf">DAUGHTER OF</p>
+                <p class="inv-parent-names" id="txtInvBrideParents">SMT. LAKSHMI &amp; SHRI RAGHAVAN</p>
+              </div>
+
+              <div class="inv-with" id="txtInvWith">with</div>
+
+              <!-- Groom Details -->
+              <div class="inv-person">
+                <h3 class="inv-name" id="txtInvGroom">Vikram Subramanian</h3>
+                <p class="inv-parent-label" id="txtInvSonOf">SON OF</p>
+                <p class="inv-parent-names" id="txtInvGroomParents">SMT. MEENAKSHI &amp; SHRI SUBRAMANIAN</p>
+              </div>
+
+              <div class="sec-orn compact-orn">
+                <img class="divider-art" src="assets/divider.webp" alt="" aria-hidden="true">
+              </div>
+
+              <div class="inv-schedule">
+                <p class="inv-date-text" id="txtInvDate">Sunday, 14 February 2027</p>
+                <p class="inv-venue-text" id="txtInvVenue">The Kalyana Mandapam, Madurai</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION: OUR STORY -->
+        <section id="story" class="sec sec-story reveal">
+          <h2 class="sec-title" id="txtStoryTitle">Our story</h2>
+          <div class="sec-orn">
+            <img class="divider-art" src="assets/divider.webp" alt="" aria-hidden="true">
+          </div>
+          <p class="story-lead" id="txtStoryLead">
+            We met at a college fest in Chennai, both volunteering at the music stage. Five years, one long year apart and many filter coffees later, we are getting married.
+          </p>
+
+          <ol class="story-line">
+            <li class="story-step reveal">
+              <span class="story-tag" id="txtStoryTag1">Fest 2021</span>
+              <p class="story-desc" id="txtStoryDesc1">Two volunteers, one music stage</p>
+            </li>
+            <li class="story-step reveal">
+              <span class="story-tag" id="txtStoryTag2">2023</span>
+              <p class="story-desc" id="txtStoryDesc2">Chennai and Bengaluru, one long call a night</p>
+            </li>
+            <li class="story-step reveal">
+              <span class="story-tag" id="txtStoryTag3">Pongal 2026</span>
+              <p class="story-desc" id="txtStoryDesc3">Both families said yes over sakkarai pongal</p>
+            </li>
+          </ol>
+        </section>
+
+        <!-- SECTION: PHOTOS GALLERY CAROUSEL -->
+        <section id="photos" class="sec sec-photos reveal">
+          <h2 class="sec-title" id="txtPhotosTitle">Us, so far</h2>
+          <div class="sec-orn">
+            <img class="divider-art" src="assets/divider.webp" alt="" aria-hidden="true">
+          </div>
+
+          <div class="photos-carousel" role="list" id="photosCarousel">
+            <!-- Photo 1 -->
+            <figure class="ph" role="listitem">
+              <div class="frame">
+                <img src="assets/photo-1.webp" alt="Our first portrait together" loading="lazy" decoding="async">
+              </div>
+              <figcaption id="txtCap1">Our first portrait together</figcaption>
+            </figure>
+            <!-- Photo 2 -->
+            <figure class="ph" role="listitem">
+              <div class="frame">
+                <img src="assets/photo-2.webp" alt="In the garden at home" loading="lazy" decoding="async">
+              </div>
+              <figcaption id="txtCap2">In the garden at home</figcaption>
+            </figure>
+            <!-- Photo 3 -->
+            <figure class="ph" role="listitem">
+              <div class="frame">
+                <img src="assets/photo-3.webp" alt="The look he gives her" loading="lazy" decoding="async">
+              </div>
+              <figcaption id="txtCap3">The look he gives her</figcaption>
+            </figure>
+            <!-- Photo 4 -->
+            <figure class="ph" role="listitem">
+              <div class="frame">
+                <img src="assets/photo-4.webp" alt="Under the bougainvillea" loading="lazy" decoding="async">
+              </div>
+              <figcaption id="txtCap4">Under the bougainvillea</figcaption>
+            </figure>
+            <!-- Photo 5 -->
+            <figure class="ph" role="listitem">
+              <div class="frame">
+                <img src="assets/photo-5.webp" alt="For Paati's album" loading="lazy" decoding="async">
+              </div>
+              <figcaption id="txtCap5">For Paati's album</figcaption>
+            </figure>
+            <!-- Photo 6 -->
+            <figure class="ph" role="listitem">
+              <div class="frame">
+                <img src="assets/photo-6.webp" alt="By the fountain" loading="lazy" decoding="async">
+              </div>
+              <figcaption id="txtCap6">By the fountain</figcaption>
+            </figure>
+          </div>
+          <p class="swipe-hint" id="txtSwipeHint">Swipe to see more</p>
+        </section>
+
+        <!-- SECTION: THE CELEBRATIONS TIMELINE -->
+        <section id="celebrations" class="sec sec-celebrations reveal">
+          <h2 class="sec-title" id="txtEventsTitle">The celebrations</h2>
+          <div class="sec-orn">
+            <img class="divider-art" src="assets/divider.webp" alt="" aria-hidden="true">
+          </div>
+
+          <div class="timeline">
+            <!-- Event 1: Mehendi -->
+            <article class="tl-item tl-left" style="--mood: #3f6b2e">
+              <div class="tl-art-card reveal">
+                <img src="assets/fn-mehendi.webp" alt="Mehendi artwork" loading="lazy" decoding="async">
+              </div>
+              <div class="tl-dot"></div>
+              <div class="tl-content reveal">
+                <span class="tl-meta" id="txtMehendiMeta">Sat, 13 Feb · 10:30 am</span>
+                <h3 class="tl-title"><span id="txtMehendiTitleEn">Mehendi</span> <span class="tl-deva" id="txtMehendiTitleHi">मेहंदी</span></h3>
+                <p class="tl-place" id="txtMehendiPlace">The garden courtyard</p>
+                <button class="textbtn add-cal-btn" onclick="addToCalendar('mehendi')" type="button">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                  </svg>
+                  <span class="txt-cal-label">Add to calendar</span>
+                </button>
+              </div>
+            </article>
+
+            <!-- Event 2: Reception -->
+            <article class="tl-item tl-right" style="--mood: #1f4d3a">
+              <div class="tl-content reveal">
+                <span class="tl-meta" id="txtReceptionMeta">Sat, 13 Feb · 7:00 pm</span>
+                <h3 class="tl-title"><span id="txtReceptionTitleEn">Reception</span> <span class="tl-deva" id="txtReceptionTitleHi">रिसेप्शन</span></h3>
+                <p class="tl-place" id="txtReceptionPlace">The mandapam hall, with dinner on banana leaves</p>
+                <button class="textbtn add-cal-btn" onclick="addToCalendar('reception')" type="button">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                  </svg>
+                  <span class="txt-cal-label">Add to calendar</span>
+                </button>
+              </div>
+              <div class="tl-dot"></div>
+              <div class="tl-art-card reveal">
+                <img src="assets/fn-reception.webp" alt="Reception artwork" loading="lazy" decoding="async">
+              </div>
+            </article>
+
+            <!-- Event 3: Muhurtham -->
+            <article class="tl-item tl-left" style="--mood: #9e1b1f">
+              <div class="tl-art-card reveal">
+                <img src="assets/fn-wedding.webp" alt="Muhurtham artwork" loading="lazy" decoding="async">
+              </div>
+              <div class="tl-dot"></div>
+              <div class="tl-content reveal">
+                <span class="tl-meta" id="txtMuhurthamMeta">Sun, 14 Feb · 7:30 am</span>
+                <h3 class="tl-title"><span id="txtMuhurthamTitleEn">Muhurtham</span> <span class="tl-deva" id="txtMuhurthamTitleHi">मुहूर्तम</span></h3>
+                <p class="tl-place" id="txtMuhurthamPlace">The mandapam, at sunrise</p>
+                <button class="textbtn add-cal-btn" onclick="addToCalendar('muhurtham')" type="button">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                  </svg>
+                  <span class="txt-cal-label">Add to calendar</span>
+                </button>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- SECTION: LIVE COUNTDOWN TIMER -->
+        <section id="countdown" class="sec sec-countdown reveal">
+          <h2 class="sec-title" id="txtCountTitle">The celebration begins</h2>
+          <div class="sec-orn">
+            <img class="divider-art" src="assets/divider.webp" alt="" aria-hidden="true">
+          </div>
+
+          <div class="countdown-boxes" id="countdownBoxes" role="timer" aria-live="off">
+            <div class="count-unit">
+              <b class="count-num" id="cntDays">94</b>
+              <span class="count-lbl" id="lblDays">Days</span>
+            </div>
+            <span class="colon" aria-hidden="true">:</span>
+            <div class="count-unit">
+              <b class="count-num" id="cntHours">02</b>
+              <span class="count-lbl" id="lblHours">Hours</span>
+            </div>
+            <span class="colon" aria-hidden="true">:</span>
+            <div class="count-unit">
+              <b class="count-num" id="cntMinutes">11</b>
+              <span class="count-lbl" id="lblMinutes">Minutes</span>
+            </div>
+            <span class="colon" aria-hidden="true">:</span>
+            <div class="count-unit">
+              <b class="count-num" id="cntSeconds">24</b>
+              <span class="count-lbl" id="lblSeconds">Seconds</span>
+            </div>
+          </div>
+
+          <p class="count-target-text" id="txtCountTarget">until the Mehendi, on Saturday, 13 February</p>
+        </section>
+
+        <!-- SECTION: VENUE & LOCATION -->
+        <section id="venue" class="sec sec-venue reveal">
+          <h2 class="sec-title" id="txtVenueTitle">Location</h2>
+          <div class="sec-orn">
+            <img class="divider-art" src="assets/divider.webp" alt="" aria-hidden="true">
+          </div>
+
+          <p class="venue-city" id="txtVenueCity">Madurai</p>
+          <h3 class="venue-hall-name" id="txtVenueHall">The Kalyana Mandapam</h3>
+          <p class="venue-address" id="txtVenueAddress">By the Teppakulam, Madurai, Tamil Nadu</p>
+
+          <div class="venue-art-wrap">
+            <img class="venue-art" src="assets/venue.webp" alt="The Kalyana Mandapam Madurai" loading="lazy" decoding="async">
+          </div>
+
+          <!-- Google Maps Container -->
+          <div class="map-container" id="mapBox">
+            <button class="map-load-btn" id="btnLoadMap" type="button">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"></path>
+                <circle cx="12" cy="9" r="2.5"></circle>
+              </svg>
+              <span id="txtBtnShowMap">Show the map</span>
+            </button>
+            <div class="map-iframe-wrapper hide" id="mapIframeWrapper">
+              <iframe
+                title="Google Map of Madurai Teppakulam"
+                width="100%"
+                height="280"
+                style="border:0; border-radius: 12px;"
+                loading="lazy"
+                allowfullscreen
+                referrerpolicy="no-referrer-when-downgrade"
+                src="https://maps.google.com/maps?q=Teppakulam+Madurai&t=&z=14&ie=UTF8&iwloc=&output=embed">
+              </iframe>
+            </div>
+          </div>
+
+          <a class="btn primary-action-btn" href="https://www.google.com/maps/search/?api=1&query=Teppakulam+Madurai" target="_blank" rel="noopener" id="btnGoogleMapsLink">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <line x1="10" y1="14" x2="21" y2="3"></line>
+            </svg>
+            <span id="txtBtnOpenMaps">Open in Google Maps</span>
+          </a>
+        </section>
+
+        <!-- SECTION: SPOTIFY BADGE -->
+        <section id="song" class="sec sec-song reveal">
+          <div class="sec-orn">
+            <img class="divider-art" src="assets/divider.webp" alt="" aria-hidden="true">
+          </div>
+          <div class="spotify-badge-card">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="#1DB954">
+              <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.498 17.316c-.218.358-.684.472-1.042.254-2.855-1.744-6.448-2.14-10.68-1.173-.41.094-.823-.158-.916-.568-.094-.41.158-.823.568-.916 4.636-1.059 8.608-.614 11.815 1.344.358.217.472.683.255 1.041zm1.467-3.264c-.274.446-.86.588-1.306.314-3.268-2.008-8.25-2.59-12.114-1.417-.502.152-1.037-.133-1.19-.635-.152-.502.133-1.037.635-1.19 4.417-1.34 9.907-.687 13.66 1.622.446.274.588.86.315 1.306zm.126-3.41c-3.918-2.327-10.375-2.541-14.124-1.403-.603.183-1.242-.164-1.425-.767-.183-.603.164-1.242.767-1.425 4.305-1.306 11.436-1.053 15.938 1.62.544.323.722 1.026.4 1.57-.323.544-1.026.722-1.57.4z"/>
+            </svg>
+            <span class="spotify-text" id="txtSpotifyBadge">Plays on Spotify</span>
+          </div>
+        </section>
+
+        <!-- SECTION: RSVP VIA WHATSAPP -->
+        <section id="rsvp" class="sec sec-rsvp reveal">
+          <h2 class="sec-title" id="txtRsvpTitle">Will you join us?</h2>
+          <div class="sec-orn">
+            <img class="divider-art" src="assets/divider.webp" alt="" aria-hidden="true">
+          </div>
+          <p class="rsvp-subtext" id="txtRsvpSub">
+            Please let us know how many of you are coming to each function, by 20 January.
+          </p>
+
+          <form class="rsvp-form" id="rsvpForm" onsubmit="event.preventDefault(); submitRsvp();">
+            <label class="field-label" for="rsvpFamily" id="lblYourName">Your name</label>
+            <input class="field-input" id="rsvpFamily" name="family" type="text" autocomplete="name" placeholder="e.g. Shreya Sharma" required>
+
+            <div class="stepper-rows">
+              <!-- Row 1: Mehendi -->
+              <div class="stepper-row">
+                <span class="row-info">
+                  <b class="row-title" id="lblRsvpRow0">Mehendi</b>
+                  <span class="row-sub" id="lblRsvpDate0">Sat, 13 Feb</span>
+                </span>
+                <div class="stepper-controls">
+                  <button class="step-btn" type="button" onclick="updateGuestCount(0, -1)" aria-label="One fewer for Mehendi">−</button>
+                  <output class="step-count" id="cnt0">1</output>
+                  <button class="step-btn" type="button" onclick="updateGuestCount(0, 1)" aria-label="One more for Mehendi">+</button>
+                </div>
+              </div>
+
+              <!-- Row 2: Reception -->
+              <div class="stepper-row">
+                <span class="row-info">
+                  <b class="row-title" id="lblRsvpRow1">Reception</b>
+                  <span class="row-sub" id="lblRsvpDate1">Sat, 13 Feb</span>
+                </span>
+                <div class="stepper-controls">
+                  <button class="step-btn" type="button" onclick="updateGuestCount(1, -1)" aria-label="One fewer for Reception">−</button>
+                  <output class="step-count" id="cnt1">1</output>
+                  <button class="step-btn" type="button" onclick="updateGuestCount(1, 1)" aria-label="One more for Reception">+</button>
+                </div>
+              </div>
+
+              <!-- Row 3: Muhurtham -->
+              <div class="stepper-row">
+                <span class="row-info">
+                  <b class="row-title" id="lblRsvpRow2">Muhurtham</b>
+                  <span class="row-sub" id="lblRsvpDate2">Sun, 14 Feb</span>
+                </span>
+                <div class="stepper-controls">
+                  <button class="step-btn" type="button" onclick="updateGuestCount(2, -1)" aria-label="One fewer for Muhurtham">−</button>
+                  <output class="step-count" id="cnt2">1</output>
+                  <button class="step-btn" type="button" onclick="updateGuestCount(2, 1)" aria-label="One more for Muhurtham">+</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Send on WhatsApp CTA -->
+            <button class="btn whatsapp-btn" type="submit" id="btnWhatsappSubmit">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                <path d="M12 2.2a9.7 9.7 0 0 0-8.4 14.6L2.3 21.7l5-1.3A9.7 9.7 0 1 0 12 2.2Zm0 17.7c-1.5 0-3-.4-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 19.9Zm4.4-6c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.5.1l-.8 1c-.1.2-.3.2-.5.1a6.6 6.6 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.5-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 2s.8 2.3 1 2.5c.1.1 1.6 2.5 4 3.5 1.5.6 2 .7 2.8.6.4-.1 1.4-.6 1.6-1.1.2-.6.2-1 .1-1.1l-.4-.3Z"/>
+              </svg>
+              <span id="txtBtnSendWhatsapp">Send on WhatsApp</span>
+            </button>
+
+            <p class="rsvp-note" id="txtRsvpNote">
+              This opens WhatsApp with your reply written out. Nothing is sent until you press send.
+            </p>
+          </form>
+        </section>
+
+        <!-- FOOTER & SIGNOFF -->
+        <footer class="sec sec-signoff reveal" id="signoff">
+          <div class="sec-orn">
+            <img class="divider-art" src="assets/divider.webp" alt="" aria-hidden="true">
+          </div>
+          <p class="so-text" id="txtFamilySignoff">With love, the Raghavan and Subramanian families</p>
+          
+          <!-- Monogram Seal Stamp -->
+          <div class="seal-container footer-seal">
+            <div class="monogram-badge">
+              <span class="monogram-text">TV</span>
+            </div>
+          </div>
+
+          <p class="so-names" id="txtCoupleSignoff">Tanya <span class="so-amp">&amp;</span> Vikram</p>
+
+          <a class="made-by-link" href="https://saath.studio" target="_blank" rel="noopener">
+            <span id="txtInviteMadeWith">Invite made with</span>
+            <img src="assets/mark.svg" alt="" width="16" height="16">
+            <span>saath.studio</span>
+          </a>
+        </footer>
+
+      </div> <!-- /paper-container -->
+
+    </main> <!-- /mainContent -->
+
+  </div> <!-- /invite-container -->
+
+  <script src="script.js"></script>
+</body>
+</html>
